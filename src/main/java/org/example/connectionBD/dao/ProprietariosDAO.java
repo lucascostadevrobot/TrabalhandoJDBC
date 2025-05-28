@@ -75,4 +75,21 @@ public class ProprietariosDAO {
             throw new RuntimeException(e);
         }
     }
+
+    //Exclusão de proprietarios
+    public Proprietarios deletandoProprietario(int id) throws SQLException{
+        Proprietarios proprietariosId = new Proprietarios();
+        try(Connection connection = ConnectionFactory.getConnection()){
+            String sql = "DELETE FROM tb_proprietarios WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            int deletandoProprietarioId = preparedStatement.executeUpdate();
+            System.out.println("IProprietario deletado com sucesso!!!" + deletandoProprietarioId);
+            proprietariosId.setId(proprietariosId.getId());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return proprietariosId;
+    }
 }
